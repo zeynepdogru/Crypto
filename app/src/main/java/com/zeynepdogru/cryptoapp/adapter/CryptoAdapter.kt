@@ -11,7 +11,7 @@ import com.zeynepdogru.cryptoapp.R
 import com.zeynepdogru.cryptoapp.databinding.ItemCryptoBinding
 import com.zeynepdogru.cryptoapp.model.Crypto
 
-class CryptoAdapter(var cyrptoList: ArrayList<Crypto>) :RecyclerView.Adapter<CryptoAdapter.CryptoViewHolder>() {
+ class CryptoAdapter( var cyrptoList: ArrayList<Crypto>) :RecyclerView.Adapter<CryptoAdapter.CryptoViewHolder>() {
 
     private val colors: Array<String> = arrayOf("#13bd27","#29c1e1","#b129e1","#d3df13","#f6bd0c","#a1fb93","#0d9de3","#ffe48f")
 

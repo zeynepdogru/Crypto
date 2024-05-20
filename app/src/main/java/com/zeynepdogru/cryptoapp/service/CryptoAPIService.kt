@@ -1,6 +1,7 @@
 package com.zeynepdogru.cryptoapp.service
 
 import com.zeynepdogru.cryptoapp.model.Crypto
+import com.zeynepdogru.cryptoapp.model.CryptoResponse
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,7 +15,7 @@ class CryptoAPIService {
         .build()
         .create(CryptoAPI::class.java)
 
-    fun getData(): Call<List<Crypto>>{
+    fun getData(): Call<CryptoResponse>{
         return api.getProducts()
     }
 }
