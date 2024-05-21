@@ -1,20 +1,33 @@
 package com.zeynepdogru.cryptoapp.viewmodel
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.zeynepdogru.cryptoapp.database.CryptoDatabase
+import com.zeynepdogru.cryptoapp.database.CryptoDao
 import com.zeynepdogru.cryptoapp.model.Crypto
 import com.zeynepdogru.cryptoapp.model.CryptoResponse
 import com.zeynepdogru.cryptoapp.service.CryptoAPIService
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class MainViewModel: ViewModel() {
+class MainViewModel(application: Application): AndroidViewModel(application) {
     private val cryptoAPI = CryptoAPIService()
     val productData = MutableLiveData<List<Crypto>>()
     val productError = MutableLiveData<Boolean>()
+
+    private var cryptoDatabase: CryptoDatabase?=null
+    private var cryptoDao: CryptoDao? =null
+
+    init{
+        cryptoDatabase= CryptoDatabase.getInstance(application)
+        cryptoDao= cryptoDatabase?.cryptoDao()
+    }
 
     fun getDataFromAPI() {
         cryptoAPI.getData().enqueue(object : Callback<CryptoResponse> { // Dikkat edin, Callback türü artık CryptoResponse
@@ -33,6 +46,9 @@ class MainViewModel: ViewModel() {
                 Log.e("RetrofitError", t.message.toString())
             }
         })
+    }
+    fun insertAll(list: List<Crypto>) = viewModelScope.launch {
+        cryptoDao?.insertAll(list)
     }
 }
 

@@ -1,58 +1,44 @@
 package com.zeynepdogru.cryptoapp.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "cryptos")
 data class Crypto(
+    @PrimaryKey(autoGenerate = true) val uid:Int=0,
+    @ColumnInfo(name="id")
     val id:String,
+    @ColumnInfo(name="symbol")
     val symbol:String,
+    @ColumnInfo(name="name")
     val name:String,
+    @ColumnInfo(name="nameid")
     val nameid:String,
+    @ColumnInfo(name="rank")
     val rank:Int,
+    @ColumnInfo(name="price_usd")
     val price_usd:String,
+    @ColumnInfo(name="percent_change_24h")
     val percent_change_24h:String,
+    @ColumnInfo(name="percent_change_1h")
     val percent_change_1h:String,
+    @ColumnInfo(name="percent_change_7d")
     val percent_change_7d:String,
+    @ColumnInfo(name="price_btc")
     val price_btc:String,
+    @ColumnInfo(name="market_cap_usd")
     val market_cap_usd:String,
+    @ColumnInfo(name="volume24")
     val volume24:Double,
+    @ColumnInfo(name="volume24a")
     val volume24a:Double,
+    @ColumnInfo(name="csupply")
     val csupply:String,
+    @ColumnInfo(name="tsupply")
     val tsupply:String,
+    @ColumnInfo(name="msupply")
     val msupply:String
 
 )
 
-
-//    val id: Int,
-//    @SerializedName("title")
-//    val title: String,
-//    val price: String,
-//    val description: String,
-//    val category: String,
-//    @SerializedName("image")
-//    val productImage: String,
-//    val rating: Rating // Rating sınıfını buraya dahil ediyoruz
-//)
-
-//data class Rating(
-//    val rate: Double,
-//    val count: Int
-//)
-
-//{
-//    "id": "46968",
-//    "symbol": "FRAX",
-//    "name": "Frax",
-//    "nameid": "frax",
-//    "rank": 101,
-//    "price_usd": "0.997055",
-//    "percent_change_24h": "0.02",
-//    "percent_change_1h": "0.00",
-//    "percent_change_7d": "0.05",
-//    "price_btc": "0.000015",
-//    "market_cap_usd": "647549394.95",
-//    "volume24": 2960669.54311165,
-//    "volume24a": 2879301.40989941,
-//    "csupply": "649462235.00",
-//    "tsupply": "1044853133.2588",
-//    "msupply": ""
-//},

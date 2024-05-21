@@ -11,7 +11,7 @@ import com.zeynepdogru.cryptoapp.R
 import com.zeynepdogru.cryptoapp.databinding.ItemCryptoBinding
 import com.zeynepdogru.cryptoapp.model.Crypto
 
- class CryptoAdapter( var cyrptoList: ArrayList<Crypto>) :RecyclerView.Adapter<CryptoAdapter.CryptoViewHolder>() {
+ class CryptoAdapter( var cryptoList: ArrayList<Crypto>, private var onClick: (position: Int)->Unit) :RecyclerView.Adapter<CryptoAdapter.CryptoViewHolder>() {
 
     private val colors: Array<String> = arrayOf("#13bd27","#29c1e1","#b129e1","#d3df13","#f6bd0c","#a1fb93","#0d9de3","#ffe48f")
 
@@ -28,13 +28,16 @@ import com.zeynepdogru.cryptoapp.model.Crypto
     }
 
     override fun getItemCount(): Int {
-        return cyrptoList.size
+        return cryptoList.size
     }
 
     override fun onBindViewHolder(holder: CryptoViewHolder, position: Int) {
-        holder.view.titleTV.text= cyrptoList[position].name
-        holder.view.priceTV.text= cyrptoList[position].nameid
+        holder.view.titleTV.text= cryptoList[position].name
+        holder.view.priceTV.text= cryptoList[position].price_usd
 
+        holder.view.carditem.setOnClickListener{
+            onClick(position)
+        }
         holder.itemView.setBackgroundColor(Color.parseColor(colors[position % 8]))
 
 //        holder.itemView.setOnClickListener {
@@ -49,7 +52,7 @@ import com.zeynepdogru.cryptoapp.model.Crypto
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateList(newList: List<Crypto>){
-        cyrptoList=newList as ArrayList<Crypto>
+        cryptoList=newList as ArrayList<Crypto>
         notifyDataSetChanged()
     }
 }
