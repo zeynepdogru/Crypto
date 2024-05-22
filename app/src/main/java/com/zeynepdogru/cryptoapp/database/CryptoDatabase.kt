@@ -19,7 +19,7 @@ abstract class CryptoDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     CryptoDatabase::class.java,
-                    "crypto-db"
+                    "crypto-DB"
                 ).build()
                 INSTANCE = instance
                 instance

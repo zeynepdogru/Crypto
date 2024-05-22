@@ -15,7 +15,7 @@ import com.zeynepdogru.cryptoapp.model.Crypto
         @Query("SELECT * FROM cryptos WHERE name = :cryptoName")
         suspend fun findByName(cryptoName: String): Crypto
 
-       @Insert
+      @Insert
         suspend fun insertAll(cryptos: List<Crypto>)
 
     }

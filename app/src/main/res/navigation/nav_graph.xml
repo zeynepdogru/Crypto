@@ -15,5 +15,9 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.zeynepdogru.cryptoapp.view.Detail.DetailFragment"
-        android:label="DetailFragment" />
+        android:label="DetailFragment" >
+        <argument
+            android:name="crypto"
+            app:argType="com.zeynepdogru.cryptoapp.model.Crypto" />
+    </fragment>
 </navigation>

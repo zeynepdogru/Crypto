@@ -23,6 +23,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     private var cryptoDatabase: CryptoDatabase?=null
     private var cryptoDao: CryptoDao? =null
+    val crypto= MutableLiveData<Crypto>()
 
     init{
         cryptoDatabase= CryptoDatabase.getInstance(application)
@@ -49,6 +50,10 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     }
     fun insertAll(list: List<Crypto>) = viewModelScope.launch {
         cryptoDao?.insertAll(list)
+    }
+
+    fun findByName(name:String) = viewModelScope.launch {
+        crypto.value=cryptoDao?.findByName(name)
     }
 }
 

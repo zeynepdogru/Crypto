@@ -23,9 +23,10 @@ class HomeFragment : Fragment() {
 
     //private lateinit var viewModel: MainViewModel
     private lateinit var binding: FragmentHomeBinding
-    private var cryptoAdapter= CryptoAdapter(arrayListOf()) { position ->
-        findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
-    }
+//    private var cryptoAdapter= CryptoAdapter(arrayListOf()) { position ->
+//        //findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
+//        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment())
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +35,7 @@ class HomeFragment : Fragment() {
 
         binding= DataBindingUtil.inflate(inflater,R.layout.fragment_home, container,false)
         //viewModel= ViewModelProvider(this)[MainViewModel::class.java]
-        binding.productRV.adapter=cryptoAdapter
+
         binding.productRV.layoutManager= LinearLayoutManager(requireContext())
         viewModel.getDataFromAPI()
         setObserves()
@@ -44,10 +45,16 @@ class HomeFragment : Fragment() {
     }
     private fun setObserves(){
         viewModel.productData.observe(viewLifecycleOwner) { list ->
+            val cryptoAdapter= CryptoAdapter(arrayListOf()) { position ->
+         //findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
+           findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(list[position]))
+   }
+            binding.productRV.adapter=cryptoAdapter
             cryptoAdapter.updateList(list)
-             //viewModel.insertAll(list) --bu çalıştırıldığında database e verilerin gelmesi gerekiyor
+           viewModel.insertAll(list) //bu çalıştırıldığında database e verilerin gelmesi gerekiyor
 
         }
+
         viewModel.productError.observe(viewLifecycleOwner) { error ->
             if (error) {
                 binding.errorTV.visibility = View.VISIBLE

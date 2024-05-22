@@ -1,9 +1,12 @@
 package com.zeynepdogru.cryptoapp.model
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "cryptos")
 data class Crypto(
     @PrimaryKey(autoGenerate = true) val uid:Int=0,
@@ -38,7 +41,7 @@ data class Crypto(
     @ColumnInfo(name="tsupply")
     val tsupply:String,
     @ColumnInfo(name="msupply")
-    val msupply:String
+    val msupply:String?
 
-)
+) : Parcelable
 
